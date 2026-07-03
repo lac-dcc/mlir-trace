@@ -13,7 +13,7 @@ target_link_libraries(probe-opt
   MLIRProbeTransforms
 
   # MLIR dependencies
-  MLIROptLib
+  MLIRMlirOptMain
   ${dialect_libs}
   ${conversion_libs}
 )
