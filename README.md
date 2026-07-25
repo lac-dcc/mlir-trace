@@ -107,12 +107,12 @@ the `mlir-runner` tool, like in the
 
 ## Usage
 ### Dependencies
-`probe` has only been tested with LLVM/MLIR 21 on Linux. We don't guarantee it
+`probe` has only been tested with LLVM/MLIR 23 on Linux. We don't guarantee it
 works with other versions and OS's. Here's a suggestion of commands that can
 be used to download and build LLVM in the correct version:
 
 ```bash
-git clone -b llvmorg-21.1.0 https://github.com/llvm/llvm-project.git
+git clone -b llvmorg-23-init https://github.com/llvm/llvm-project.git
 mkdir llvm-project/build
 cd llvm-project/build
 cmake -G Ninja ../llvm                  \

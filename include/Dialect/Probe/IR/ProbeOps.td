@@ -68,8 +68,8 @@ def Probe_ObserveOp: Probe_Op<"observe", [
         return llvm::failure();
 
       auto tensorOp = getOperation();
-      auto memrefOp = rewriter.create<ObserveOp>(
-          getLoc(), *inputBufferOrFailure, getOpIDAttr(), getResultIDAttr());
+      auto memrefOp = ObserveOp::create(rewriter, getLoc(),
+          *inputBufferOrFailure, getOpIDAttr(), getResultIDAttr());
       memrefOp->setAttrs(tensorOp->getAttrs());
       rewriter.replaceOp(tensorOp, memrefOp);
       return llvm::success();

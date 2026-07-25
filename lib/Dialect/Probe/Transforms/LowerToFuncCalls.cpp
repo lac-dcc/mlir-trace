@@ -72,7 +72,7 @@ private:
 
     rewriter.setInsertionPointToStart(moduleOp.getBody());
     auto probeFunc =
-        rewriter.create<func::FuncOp>(moduleOp.getLoc(), funcName, funcTy);
+        func::FuncOp::create(rewriter, moduleOp.getLoc(), funcName, funcTy);
 
     // Mark as private declaration, since it will be linked externally
     probeFunc.setPrivate();
@@ -111,16 +111,16 @@ private:
       rewriter.setInsertionPoint(observeOp);
       auto loc = observeOp.getLoc();
       // Cast to unranked
-      auto unrankedInput = rewriter.create<memref::CastOp>(
-          loc,
+      auto unrankedInput = memref::CastOp::create(
+          rewriter, loc,
           UnrankedMemRefType::get(inTy.getElementType(), kDefaultMemorySpace),
           input);
 
       // Materialize constants for opID and resultID
       Value opIDVal =
-          rewriter.create<arith::ConstantOp>(loc, observeOp.getOpIDAttr());
+          arith::ConstantOp::create(rewriter, loc, observeOp.getOpIDAttr());
       Value resultIDVal =
-          rewriter.create<arith::ConstantOp>(loc, observeOp.getResultIDAttr());
+          arith::ConstantOp::create(rewriter, loc, observeOp.getResultIDAttr());
 
       // Insert the call
       rewriter.replaceOpWithNewOp<func::CallOp>(
